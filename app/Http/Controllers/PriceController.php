@@ -11,9 +11,7 @@ class PriceController extends Controller
 
     public function index()
     {
-        $price = Price::all();
-
-        return response()->json($price);
+        return response()->json(Price::all());
     }
 
 

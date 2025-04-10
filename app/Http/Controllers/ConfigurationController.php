@@ -11,7 +11,7 @@ class ConfigurationController extends Controller
 
     public function index()
     {
-        return Configuration::all();
+        return response()->json(Configuration::all());
     }
 
     public function store(StoreConfigurationRequest $request)

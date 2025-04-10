@@ -9,14 +9,19 @@ use App\Models\Car;
 use App\Services\CarService;
 use Illuminate\Support\Facades\Cache;
 
+
 class CarController extends Controller
 {
-    public function __construct(protected CarService $carService) {}
-    public function index()
+    public function __construct(protected CarService $carService)
     {
-        return Car::all();
     }
 
+
+    public function index()
+    {
+        return response()->json(Car::all());
+    }
+    
     public function store(StoreCarRequest $request)
     {
         $car = Car::create($request->validated());
@@ -24,10 +29,12 @@ class CarController extends Controller
         return response()->json($car, 201);
     }
 
+
     public function show(Car $car)
     {
         return $car;
     }
+
 
     public function update(UpdateCarRequest $request, Car $car)
     {
@@ -36,6 +43,7 @@ class CarController extends Controller
         return response()->json($car);
     }
 
+
     public function destroy(Car $car)
     {
         $car->delete();
@@ -43,9 +51,9 @@ class CarController extends Controller
         return response()->json(null, 204);
     }
 
+
     public function available()
     {
-
         $cars = Cache::remember('cars_available', 600, function () {
             return $this->carService->getAvailableCars();
         });
