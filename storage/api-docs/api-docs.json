@@ -1,0 +1,1028 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Car API",
+        "description": "API для управления автомобилями",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/cars": {
+            "get": {
+                "tags": [
+                    "Автомобили"
+                ],
+                "summary": "Получить список всех автомобилей",
+                "operationId": "1fd4f1fdc0da258c5084bcdce4bbe693",
+                "responses": {
+                    "200": {
+                        "description": "Список автомобилей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Car"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Автомобили"
+                ],
+                "summary": "Создать новый автомобиль",
+                "operationId": "6f519ab2c9767d4d3b1be7cf8f1287ed",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Название автомобиля",
+                                        "type": "string",
+                                        "example": "Toyota Camry"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Автомобиль успешно создан",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Car"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Некорректные данные"
+                    }
+                }
+            }
+        },
+        "/api/cars/{id}": {
+            "get": {
+                "tags": [
+                    "Автомобили"
+                ],
+                "summary": "Получить информацию об автомобиле по ID",
+                "operationId": "b222bfa902eefbb6a4a875762081dcbc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Информация об автомобиле",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Car"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Автомобили"
+                ],
+                "summary": "Удалить автомобиль",
+                "operationId": "802b64f09e484fbb1bb3817362d30cc9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Автомобиль удален"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Автомобили"
+                ],
+                "summary": "Обновить информацию об автомобиле",
+                "operationId": "067e985e39de9ca94c07247a147d93ca",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Название автомобиля",
+                                        "type": "string",
+                                        "example": "Toyota Camry"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Автомобиль обновлен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Car"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cars/available": {
+            "get": {
+                "tags": [
+                    "Автомобили"
+                ],
+                "summary": "Получить список автомобилей с актуальными ценами",
+                "operationId": "333d1a526a5f7e858f4bf7c3fc954e9f",
+                "responses": {
+                    "200": {
+                        "description": "Список автомобилей с актуальными ценами",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CarResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/configurations": {
+            "get": {
+                "tags": [
+                    "Конфигурации"
+                ],
+                "summary": "Получить список всех конфигураций",
+                "operationId": "ecf557529a783e14266d0c9e51fb28ea",
+                "responses": {
+                    "200": {
+                        "description": "Список конфигураций",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Configuration"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Конфигурации"
+                ],
+                "summary": "Создать новую конфигурацию",
+                "operationId": "a686fda99be004f135bc70ea4b237df3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "car_id",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "car_id": {
+                                        "description": "ID автомобиля",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "name": {
+                                        "description": "Название конфигурации",
+                                        "type": "string",
+                                        "example": "Comfort"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Конфигурация успешно создана",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Configuration"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Некорректные данные"
+                    }
+                }
+            }
+        },
+        "/api/configurations/{id}": {
+            "get": {
+                "tags": [
+                    "Конфигурации"
+                ],
+                "summary": "Получить одну конфигурацию по ID",
+                "operationId": "603f20b4445da5c154c2dd1cb913471a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID конфигурации",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Конфигурация найдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Configuration"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Конфигурация не найдена"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Конфигурации"
+                ],
+                "summary": "Удалить конфигурацию",
+                "operationId": "c548b7fd6072a3f525f104c851e72e0e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID конфигурации",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Конфигурация удалена"
+                    },
+                    "404": {
+                        "description": "Конфигурация не найдена"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Конфигурации"
+                ],
+                "summary": "Обновить конфигурацию",
+                "operationId": "1d482721a1fd466b52916701c50117ef",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID конфигурации",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "car_id": {
+                                        "description": "ID автомобиля",
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "name": {
+                                        "description": "Название конфигурации",
+                                        "type": "string",
+                                        "example": "Premium"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Конфигурация обновлена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Configuration"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Конфигурация не найдена"
+                    }
+                }
+            }
+        },
+        "/api/options": {
+            "get": {
+                "tags": [
+                    "Опции"
+                ],
+                "summary": "Получить все доступные опции",
+                "operationId": "aba522e39edcbd0a845ebb6cf802a499",
+                "responses": {
+                    "200": {
+                        "description": "Список всех опций",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Option"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Опции"
+                ],
+                "summary": "Создать новую опцию",
+                "operationId": "321d8300ff36fc5056c2f6f0132602cc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Название опции",
+                                        "type": "string",
+                                        "example": "Климат-контроль"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Опция успешно создана",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Option"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/options/{id}": {
+            "get": {
+                "tags": [
+                    "Опции"
+                ],
+                "summary": "Получить информацию об опции по ID",
+                "operationId": "98465114297e0e658b4250d937997608",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Информация об опции",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Option"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Опция не найдена"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Опции"
+                ],
+                "summary": "Удалить опцию",
+                "operationId": "75240c34e59673b44a9e49f58fe805f6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Опция успешно удалена"
+                    },
+                    "404": {
+                        "description": "Опция не найдена"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Опции"
+                ],
+                "summary": "Обновить информацию об опции",
+                "operationId": "51b131a0e07f1ac57537736cae1afc81",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Название опции",
+                                        "type": "string",
+                                        "example": "Климат-контроль"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Опция успешно обновлена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Option"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Опция не найдена"
+                    }
+                }
+            }
+        },
+        "/api/prices": {
+            "get": {
+                "tags": [
+                    "Цены"
+                ],
+                "summary": "Получить список всех цен",
+                "operationId": "63348bf88df6d4eb68dfd5192429af28",
+                "responses": {
+                    "200": {
+                        "description": "Список всех цен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Price"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Цены"
+                ],
+                "summary": "Создать новую цену",
+                "operationId": "6a8846778186567e81a8ae51b36fabbd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "configuration_id",
+                                    "price",
+                                    "start_date"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "ID цены",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "configuration_id": {
+                                        "description": "ID конфигурации",
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "price": {
+                                        "description": "цена",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "135000.50"
+                                    },
+                                    "start_date": {
+                                        "description": "Дата начала лействия цены",
+                                        "type": "string",
+                                        "example": "2024-04-01T10:00:00Z"
+                                    },
+                                    "end_date": {
+                                        "description": "Дата окончания действия цены (Если установлена)",
+                                        "type": "string",
+                                        "example": "2024-04-25T10:00:00Z"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Созданная цена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Price"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/prices/{id}": {
+            "get": {
+                "tags": [
+                    "Цены"
+                ],
+                "summary": "Получить информацию о конкретной цене по ID",
+                "operationId": "a573c52428ed8649d28f25cf8388580b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID цены",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Информация о цене",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Price"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Цена не найдена"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Цены"
+                ],
+                "summary": "Удалить цену",
+                "operationId": "affc9c47028dfff617ab6f9da7280b26",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID цены",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Цена удалена"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Цены"
+                ],
+                "summary": "Обновить цену",
+                "operationId": "a9efdec779d6fde8ea55216f7011ebf8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID цены",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "configuration_id",
+                                    "price",
+                                    "start_date"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "ID цены",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "configuration_id": {
+                                        "description": "ID конфигурации",
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "price": {
+                                        "description": "цена",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "135000.50"
+                                    },
+                                    "start_date": {
+                                        "description": "Дата начала лействия цены",
+                                        "type": "string",
+                                        "example": "2024-04-01T10:00:00Z"
+                                    },
+                                    "end_date": {
+                                        "description": "Дата окончания действия цены (Если установлена)",
+                                        "type": "string",
+                                        "example": "2024-04-25T10:00:00Z"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Обновлённая цена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Price"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CarResource": {
+                "title": "Автомобиль c актуальными ценами и конфигурациями",
+                "description": "Автомобиль с конфигурациями, опциями и актуальной ценой",
+                "required": [
+                    "id",
+                    "name",
+                    "configurations"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID автомобиля",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "Название модели автомобиля",
+                        "type": "string",
+                        "example": "Лада Веста"
+                    },
+                    "configurations": {
+                        "description": "Актуальные комплектации автомобиля",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ConfigurationResource"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ConfigurationResource": {
+                "title": "Конфигурация автомобиля c актуальными ценами",
+                "description": "Конфигурация с опциями и текущей ценой",
+                "required": [
+                    "id",
+                    "name",
+                    "options",
+                    "current_price"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID конфигурации",
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "name": {
+                        "description": "Название конфигурации",
+                        "type": "string",
+                        "example": "Комфорт"
+                    },
+                    "options": {
+                        "description": "Список названий опций",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Климат контроль"
+                        }
+                    },
+                    "current_price": {
+                        "description": "Актуальная цена конфигурации",
+                        "type": "number",
+                        "format": "float",
+                        "example": 135000
+                    }
+                },
+                "type": "object"
+            },
+            "Car": {
+                "title": "Автомобиль",
+                "description": "Модель автомобиля",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID автомобиля",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "Название модели автомобиля",
+                        "type": "string",
+                        "example": "Лада Веста"
+                    },
+                    "created_at": {
+                        "description": "Дата создания записи",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-04-01T10:00:00Z"
+                    },
+                    "updated_at": {
+                        "description": "Дата обновления записи",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-04-01T10:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Configuration": {
+                "title": "Конфигурация",
+                "required": [
+                    "car_id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID конфигурации",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "car_id": {
+                        "description": "ID автомобиля",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "Название конфигурации",
+                        "type": "string",
+                        "example": "Лада Веста"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-04-01T10:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-04-01T10:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Option": {
+                "title": "Опция",
+                "description": "Опция, для конфигурации автомобиля",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Уникальный идентификатор опции",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "Название опции",
+                        "type": "string",
+                        "example": "Климат-контроль"
+                    },
+                    "created_at": {
+                        "description": "Дата создания",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-04-01T12:00:00Z"
+                    },
+                    "updated_at": {
+                        "description": "Дата последнего обновления",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-04-01T12:30:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Price": {
+                "title": "Цена",
+                "description": "Цена для комплектации автомобиля",
+                "required": [
+                    "configuration_id",
+                    "price",
+                    "start_date"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Уникальный идентификатор цены",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "configuration_id": {
+                        "description": "ID комплектации, к которой относится цена",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "price": {
+                        "description": "Цена комплектации",
+                        "type": "number",
+                        "format": "float",
+                        "example": 35000.5
+                    },
+                    "start_date": {
+                        "description": "Дата начала действия цены",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-04-01T10:00:00Z"
+                    },
+                    "end_date": {
+                        "description": "Дата окончания действия цены (Если установлена)",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-01T10:00:00Z"
+                    },
+                    "created_at": {
+                        "description": "Дата создания",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-04-01T10:00:00Z"
+                    },
+                    "updated_at": {
+                        "description": "Дата последнего обновления",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-04-01T10:30:00Z"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Автомобили",
+            "description": "Управление автомобилями"
+        },
+        {
+            "name": "Конфигурации",
+            "description": "Управление конфигурациями автомобилей"
+        },
+        {
+            "name": "Опции",
+            "description": "Управление опциями для конфигураций"
+        },
+        {
+            "name": "Цены",
+            "description": "Управление ценами для комплектаций"
+        }
+    ]
+}
