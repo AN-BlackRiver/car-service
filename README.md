@@ -11,10 +11,10 @@
     DB_PASSWORD=postgres_pass  
 4. настраиваем подключение к Redis (Указываем ваши данные для подключения):
    ---------------------------------------------------------------------
-    CACHE_STORE=database
-   ----------------------
+    CACHE_STORE=redis
+   
     REDIS_HOST=127.0.0.1  
     REDIS_PASSWORD=null  
     REDIS_PORT=6379  
-5. запускаем миграции с сидом php artisan migrate --seed (при желании базу можно поднять из дампа файл лежит /database/dump-sql)
+6. запускаем миграции с сидом php artisan migrate --seed (при желании базу можно поднять из дампа файл лежит /database/dump-sql)
    
