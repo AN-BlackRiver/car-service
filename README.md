@@ -1,4 +1,4 @@
-1. composer install  
+1. выполняем composer install  
 2. cоздаем .ENV файл  
 3. выполняем - php artisan key:generate  
 4. настраиваем подключение к БД (Указываем ваши данные для подключения):  
