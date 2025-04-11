@@ -17,4 +17,6 @@
     REDIS_PASSWORD=null  
     REDIS_PORT=6379  
 6. запускаем миграции с сидом php artisan migrate --seed (при желании базу можно поднять из дампа файл лежит /database/dump-sql)
+7. запускаем сервер (В зависимости от вашего окружения)
+8. переходим http://localhost/api/documentation
    
